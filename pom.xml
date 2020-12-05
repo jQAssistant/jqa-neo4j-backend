@@ -8,16 +8,15 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.buschmais.jqassistant.neo4jserver</groupId>
-    <artifactId>parent</artifactId>
+    <groupId>com.buschmais.jqassistant.neo4j</groupId>
+    <artifactId>embedded</artifactId>
     <version>1.10.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
-    <name>jQAssistant Embedded Neo4j Server Parent</name>
+    <name>jQAssistant Embedded Neo4j</name>
     <url>http://jqassistant.org/</url>
 
     <description>
-        Provides integrations jQAssistant and Neo4j server.
+        Provides the integration of an embedded Neo4j server.
     </description>
 
     <properties>
@@ -25,7 +24,7 @@
         <jqa-asciidoctor-utilities.version>1.10.0-SNAPSHOT</jqa-asciidoctor-utilities.version>
         <jqa-own-constraints.version>1.10.0-SNAPSHOT</jqa-own-constraints.version>
         <org.mockito.version>2.24.0</org.mockito.version>
-        <org.hamcrest.version>2.0.0.0</org.hamcrest.version>
+        <org.hamcrest.version>2.2</org.hamcrest.version>
     </properties>
 
     <organization>
@@ -65,10 +64,6 @@
                         <quiet>true</quiet>
                         <detectLinks>false</detectLinks>
                         <detectOfflineLinks>false</detectOfflineLinks>
-                        <additionalOptions>
-                            <additionalOption>-Xdoclint:none</additionalOption>
-                            <additionalOption>--base-dir ${project.basedir}</additionalOption>
-                        </additionalOptions>
                         <groups>
                             <group>
                                 <!--<title>API</title>-->
@@ -76,15 +71,7 @@
                                 <packages>com.buschmais.jqassistant.${project.artifactId}.api*</packages>
                             </group>
                         </groups>
-                        <doclet>org.asciidoctor.Asciidoclet</doclet>
-                        <docletArtifact>
-                            <groupId>org.asciidoctor</groupId>
-                            <artifactId>asciidoclet</artifactId>
-                            <version>1.5.4</version>
-                        </docletArtifact>
-                        <!--<overview>src/main/java/overview.adoc</overview>-->
                     </configuration>
-
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -158,7 +145,6 @@
                 <groupId>com.buschmais.jqassistant</groupId>
                 <artifactId>jqassistant-maven-plugin</artifactId>
                 <configuration>
-                    <severity>minor</severity>
                     <scanIncludes>
                         <scanInclude>
                             <path>${project.basedir}</path>
@@ -203,11 +189,6 @@
         </repository>
     </repositories>
 
-    <modules>
-        <module>bootstrap</module>
-        <module>neo4jv3</module>
-    </modules>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -219,7 +200,7 @@
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
-                <artifactId>java-hamcrest</artifactId>
+                <artifactId>hamcrest</artifactId>
                 <version>${org.hamcrest.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -231,5 +212,77 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j</artifactId>
+            <version>${org.neo4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j.app</groupId>
+            <artifactId>neo4j-server</artifactId>
+            <version>${org.neo4j.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-access</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j.client</groupId>
+            <artifactId>neo4j-browser</artifactId>
+            <version>${org.neo4j.version}</version>
+        </dependency>
+        <!-- for determining mime types -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>1.22</version>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- Test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

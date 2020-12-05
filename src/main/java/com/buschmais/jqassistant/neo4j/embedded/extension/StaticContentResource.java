@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.neo4j.backend.neo4jv3.extension;
+package com.buschmais.jqassistant.neo4j.embedded.extension;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +18,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.apache.tika.Tika;
-import org.neo4j.kernel.configuration.Config;
+import org.neo4j.configuration.Config;
 import org.neo4j.server.web.WebServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

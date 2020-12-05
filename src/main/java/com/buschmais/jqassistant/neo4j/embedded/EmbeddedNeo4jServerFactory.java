@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.neo4j.backend.bootstrap;
+package com.buschmais.jqassistant.neo4j.embedded;
 
 import java.util.Properties;
 

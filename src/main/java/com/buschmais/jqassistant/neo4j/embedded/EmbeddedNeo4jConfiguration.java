@@ -1,7 +1,13 @@
-package com.buschmais.jqassistant.neo4j.backend.bootstrap;
+package com.buschmais.jqassistant.neo4j.embedded;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Builder.Default;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Describes the configuration to apply to the embedded Neo4j server.
