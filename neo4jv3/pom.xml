@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.buschmais.jqassistant.neo4jserver</groupId>
         <artifactId>parent</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.13.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>neo4jv3</artifactId>
@@ -25,10 +25,21 @@
         <dependency>
             <groupId>com.buschmais.xo</groupId>
             <artifactId>xo.neo4j.embedded</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.neo4j.community</groupId>
+                    <artifactId>it-test-support</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j</artifactId>
+            <version>${org.neo4j_3x.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j.community</groupId>
+            <artifactId>it-test-support</artifactId>
             <version>${org.neo4j_3x.version}</version>
         </dependency>
         <dependency>
@@ -79,14 +90,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
             <scope>compile</scope>
         </dependency>
         <!-- Test -->
