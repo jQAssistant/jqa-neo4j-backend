@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.buschmais.jqassistant.neo4jserver</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>embedded</artifactId>
     <version>1.13.0-SNAPSHOT</version>
 
     <name>jQAssistant Embedded Neo4j</name>
@@ -26,6 +26,7 @@
         <jqa-own-constraints.version>1.13.0-SNAPSHOT</jqa-own-constraints.version>
         <org.mockito.version>2.24.0</org.mockito.version>
         <org.hamcrest.version>2.0.0.0</org.hamcrest.version>
+        <org.neo4j.browser.version>4.4.7</org.neo4j.browser.version>
     </properties>
 
     <organization>
@@ -191,30 +192,23 @@
             <version>${org.neo4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.neo4j.app</groupId>
-            <artifactId>neo4j-server</artifactId>
-            <version>${org.neo4j.version}</version>
+            <groupId>org.neo4j.client</groupId>
+            <artifactId>neo4j-browser</artifactId>
+            <version>${org.neo4j.browser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.buschmais.xo</groupId>
+            <artifactId>xo.neo4j.embedded</artifactId>
             <exclusions>
                 <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-access</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
+                    <groupId>org.neo4j</groupId>
+                    <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.neo4j.client</groupId>
-            <artifactId>neo4j-browser</artifactId>
-            <version>${org.neo4j.version}</version>
-        </dependency>
-        <!-- for determining mime types -->
-        <dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-core</artifactId>
-            <version>1.22</version>
+            <groupId>io.smallrye.config</groupId>
+            <artifactId>smallrye-config-core</artifactId>
         </dependency>
         <!-- Lombok -->
         <dependency>
@@ -243,7 +237,7 @@
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
+            <artifactId>java-hamcrest</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
