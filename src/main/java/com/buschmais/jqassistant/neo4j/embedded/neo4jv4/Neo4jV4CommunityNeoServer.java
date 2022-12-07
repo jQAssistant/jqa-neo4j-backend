@@ -51,12 +51,13 @@ class Neo4jV4CommunityNeoServer implements EmbeddedNeo4jServer {
         WebAppContext rootContext = getWebAppContext("/", "browser/");
         WebAppContext pluginContext = getWebAppContext("/jqassistant", "META-INF/jqassistant-static-content/");
         server.setHandler(new HandlerCollection(rootContext, pluginContext));
-        LOGGER.info("Starting HTTP server, Neo4j browser available at http://{}:{}.", embedded.listenAddress(), embedded.httpPort());
+        LOGGER.info("Starting HTTP server.");
         try {
             server.start();
         } catch (Exception e) {
             throw new RuntimeException("Cannot start embedded server.", e);
         }
+        LOGGER.info("Neo4j browser available at http://{}:{}.", embedded.listenAddress(), embedded.httpPort());
     }
 
     private WebAppContext getWebAppContext(String contextPath, String resourceRoot) {
@@ -70,8 +71,8 @@ class Neo4jV4CommunityNeoServer implements EmbeddedNeo4jServer {
     @Override
     public void stop() {
         if (server != null) {
+            LOGGER.info("Stopping HTTP server.");
             try {
-                LOGGER.info("Stopping HTTP server.");
                 server.stop();
             } catch (Exception e) {
                 throw new RuntimeException("Cannot stop embedded server.", e);
